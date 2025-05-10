@@ -7,9 +7,10 @@ $id = $_POST['id'] ?? 0;
 $name = $_POST['name'] ?? '';
 $email = $_POST['email'] ?? '';
 $phone = $_POST['phone'] ?? '';
+$course_code = $_POST['course_code'] ?? '';
 
 // Update query
-$sql = "UPDATE students SET name = '$name', email = '$email', phone = '$phone' WHERE id = $id";
+$sql = "UPDATE students SET name = '$name', email = '$email', phone = '$phone', course_code = '$course_code' WHERE id = $id";
 
 // Execute the query
 if ($conn->query($sql) === TRUE) {

@@ -16,7 +16,7 @@ $result = mysqli_query($conn, $sql);
     <br><br>
     <table border="1" cellpadding="10">
         <tr>
-            <th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Action</th>
+            <th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Course Code</th><th>Action</th>
         </tr>
         <?php while ($row = mysqli_fetch_assoc($result)) { ?>
         <tr>
@@ -24,6 +24,7 @@ $result = mysqli_query($conn, $sql);
             <td><?= $row['name']; ?></td>
             <td><?= $row['email']; ?></td>
             <td><?= $row['phone']; ?></td>
+            <td><?= $row['course_code']; ?></td>
             <td>
                 <a href="editform.php?id=<?= $row['id']; ?>">Edit</a> |
                 <a href="delete.php?id=<?= $row['id']; ?>" onclick="return confirm('Are you sure?')">Delete</a>

@@ -15,6 +15,9 @@
         <label>Phone:</label><br>
         <input type="text" name="phone" required><br><br>
 
+        <label>Course Code:</label><br>
+        <input type="text" name="course_code" required><br><br>
+
         <input type="submit" value="Add Student">
     </form>
 

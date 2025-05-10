@@ -32,6 +32,8 @@ if ($result->num_rows === 1) {
         <input type="email" name="email" value="<?php echo $row['email']; ?>" required><br><br>
         <label>Phone:</label><br>
         <input type="text" name="phone" value="<?php echo $row['phone']; ?>" required><br><br>
+        <label>Course Code:</label><br>
+        <input type="text" name="course_code" value="<?php echo $row['course_code']; ?>" required><br><br>
         <input type="submit" value="Update">
     </form>
     <br>
