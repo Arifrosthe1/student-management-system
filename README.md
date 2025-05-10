@@ -4,7 +4,7 @@ A simple web-based Student Management System built with PHP and MySQL, designed 
 
 ## Features
 
-* **Add New Student**: Add student details such as name, age, course, and contact information.
+* **Add New Student**: Add student details such as name, course, and contact information.
 * **View Students**: Display a list of all registered students.
 * **Update Student Information**: Edit the details of an existing student.
 * **Delete Student**: Remove a student's record from the system.
