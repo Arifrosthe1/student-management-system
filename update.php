@@ -15,7 +15,7 @@ $sql = "UPDATE students SET name = '$name', email = '$email', phone = '$phone', 
 // Execute the query
 if ($conn->query($sql) === TRUE) {
     echo "<h2>Record updated successfully.</h2>";
-    echo "<br><a href='index.php'>>Go back to Student List<</a>";
+    header("Location: index.php");
 } else {
     echo "Error updating record: " . $conn->error;
 }
