@@ -12,11 +12,11 @@
     <form method="POST" action="login_process.php">
         <div class="mb-3">
             <label class="form-label">Username</label>
-            <input type="text" name="username" class="form-control me-2" placeholder="Username">
+            <input type="text" name="username" class="form-control me-2" placeholder="Username" require>
         </div>
         <div class="mb-3">
             <label class="form-label">Pasword</label>
-            <input type="password" name="password" class="form-control me-2">
+            <input type="password" name="password" class="form-control me-2" required placeholder="Password">
         </div>
         <button type="submit" class="btn btn-primary">Login</button>
     </form>

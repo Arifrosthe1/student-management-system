@@ -45,7 +45,7 @@ if (!isset($_SESSION['username'])) {
         <input type="text" name="course_code" required><br><br>
         </div>
 
-        <button type="button" class="btn btn-outline-success">Add Student</button>
+        <button type="submit" class="btn btn-outline-success">Add Student</button>
     </form>
 
     <a class="btn btn-primary" href="index.php" role="button">← Back to Student List</a>
