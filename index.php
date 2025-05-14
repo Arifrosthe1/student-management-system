@@ -4,6 +4,13 @@ if (!isset($_SESSION['username'])) {
     header("Location: login.php");
     exit();
 }
+$page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
+if ($page < 1) $page = 1;
+
+$limit = 5;
+$offset = ($page - 1) * $limit;
+
+
 ?>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -22,12 +29,21 @@ include 'db.php';
 $search = $_GET['search'] ?? '';
 
 if ($search) {
-    $sql = "SELECT * FROM students WHERE name LIKE '%$search%' OR email LIKE '%$search%' OR course_code LIKE '%$search%'";
+    $sql = "SELECT * FROM students WHERE name LIKE '%$search%' OR email LIKE '%$search%' OR course_code LIKE '%$search%' LIMIT $limit OFFSET $offset";
+
 } else {
-    $sql = "SELECT * FROM students";
+    $sql = "SELECT * FROM students LIMIT $limit OFFSET $offset";
 }
 
 $result = $conn->query($sql);
+
+$totalResult = $conn->query("SELECT COUNT(*) AS total FROM students");
+$totalRow = $totalResult->fetch_assoc();
+$totalStudents = $totalRow['total'];
+
+$totalPages = ceil($totalStudents / $limit);
+
+
 ?>
 
 
@@ -45,6 +61,12 @@ $result = $conn->query($sql);
         <input type="text" name="search" class="form-control me-2" placeholder="Search students..." value="<?= $_GET['search'] ?? '' ?>">
         <button type="submit" class="btn btn-primary">Search</button>
     </form>
+
+    <div><?php for ($i = 1; $i <= $totalPages; $i++) {?>
+        <a class="btn btn-primary" href='index.php?page=<?= $i ?>' role="button"><?= $i ?></a>
+        <?php } ?>
+    </div>
+
     <br>
     <table class="table table-bordered table-striped border-black">
         <thead class="table-dark">
