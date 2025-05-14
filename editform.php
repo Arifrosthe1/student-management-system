@@ -1,6 +1,14 @@
+<?php
+session_start();
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit();
+}
+?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Student Management System (CRUD Project)</a>
+    <a href="logout.php" class="btn btn-danger">Logout</a>
     <a class="btn btn-outline-light ms-auto" href="index.php">Back to Student List</a>
   </div>
 </nav>

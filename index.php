@@ -1,7 +1,17 @@
+<?php
+session_start();
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit();
+}
+?>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Student Management System (CRUD Project)</a>
+    <a href="logout.php" class="btn btn-danger">Logout</a>
     <a class="btn btn-outline-light ms-auto" href="addform.php">Add Student</a>
+    
   </div>
 </nav>
 
@@ -9,8 +19,15 @@
 <?php
 include 'db.php';
 
-$sql = "SELECT * FROM students";
-$result = mysqli_query($conn, $sql);
+$search = $_GET['search'] ?? '';
+
+if ($search) {
+    $sql = "SELECT * FROM students WHERE name LIKE '%$search%' OR email LIKE '%$search%' OR course_code LIKE '%$search%'";
+} else {
+    $sql = "SELECT * FROM students";
+}
+
+$result = $conn->query($sql);
 ?>
 
 
@@ -24,6 +41,11 @@ $result = mysqli_query($conn, $sql);
 <body>
     <h2>Student List</h2>
     <br>
+    <form method="GET" class="d-flex mb-3">
+        <input type="text" name="search" class="form-control me-2" placeholder="Search students..." value="<?= $_GET['search'] ?? '' ?>">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+    <br>
     <table class="table table-bordered table-striped border-black">
         <thead class="table-dark">
             <tr>
@@ -36,7 +58,9 @@ $result = mysqli_query($conn, $sql);
             </tr>
         </thead>
             <tbody>
-                <?php while ($row = mysqli_fetch_assoc($result)) { ?>
+                <?php 
+                if ($result->num_rows > 0) {
+                while ($row = mysqli_fetch_assoc($result)) { ?>
                     <tr>
                         <td><?= $row['id']; ?></td>
                         <td><?= $row['name']; ?></td>
@@ -49,7 +73,7 @@ $result = mysqli_query($conn, $sql);
                         <a class="btn btn-danger" href="delete.php?id=<?= $row['id']; ?>" onclick="return confirm('Are you sure?')" role="button">Delete</a>
                         </td>
                     </tr>
-                <?php } ?>
+                <?php }} else {echo "<tr><td colspan='6'>No students found.</td></tr>";}?>
             </tbody>
     </table>
 
